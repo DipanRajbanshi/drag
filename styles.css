@@ -1,0 +1,175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.slider-container {
+    max-width: 1000px;
+    height: 80vh;
+    margin: 50px auto;
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+    touch-action: none;
+}
+
+.slider {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+    touch-action: none;
+    cursor: grab;
+    position: relative;
+}
+
+.slider.grabbing {
+    cursor: grabbing;
+    transition: none;
+}
+
+.slide {
+    width: 250px;
+    height: 250px;
+    margin: -50px auto;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        inset 0 0 32px 0 rgba(255, 255, 255, 0.1);
+    flex: none;
+    transition: all 0.3s ease-out;
+    position: relative;
+    transform-origin: center center;
+    opacity: 0.7;
+    transform: scale(0.9) translateZ(-100px);
+    overflow: hidden;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+}
+
+/* Active slide styles */
+.slide.active {
+    opacity: 1;
+    transform: scale(1.1) translateZ(0);
+    z-index: 2;
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.2),
+        inset 0 0 32px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Previous and next slide styles */
+.slide.prev,
+.slide.next {
+    opacity: 0.7;
+    transform: scale(0.85) translateZ(-50px);
+}
+
+/* First and last slides need margin adjustment */
+.slide:first-child {
+    margin-top: 0;
+}
+
+.slide:last-child {
+    margin-bottom: 0;
+}
+
+/* Remove general hover effect */
+.slide:hover {
+    transform: none;
+    opacity: 0.7;
+    z-index: 1;
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.15),
+        inset 0 0 32px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Add hover effect only for active slide */
+.slide.active:hover {
+    transform: scale(1.15) translateZ(50px);
+    opacity: 1;
+    z-index: 3;
+    box-shadow: 
+        0 8px 32px 0 rgba(31, 38, 135, 0.25),
+        inset 0 0 32px 0 rgba(255, 255, 255, 0.25);
+}
+
+.pagination {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.dot {
+    margin: 5px 0;
+}
+
+.dot.active {
+    background: #333;
+}
+
+@media (max-height: 768px) {
+    .slide {
+        width: 350px;
+        height: 350px;
+    }
+}
+
+@media (max-height: 480px) {
+    .slide {
+        width: 300px;
+        height: 300px;
+    }
+}
+
+/* Add gradient background to the container */
+body {
+    background: linear-gradient(45deg, #ff6b6b, #a36bff);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+/* Update the content inside slides to be more like the image */
+.slide-content {
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.slide-header {
+    width: 80%;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.slide-text {
+    width: 60%;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.slide-text.short {
+    width: 40%;
+}
